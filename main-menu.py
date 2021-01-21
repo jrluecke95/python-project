@@ -1,6 +1,8 @@
-Paladin
-Wizard
-Assassin
+from character import Character
+from hero import Hero
+from paladin import Paladin
+from wizard import Wizard
+from assassin import Assassin
 
 # this will be the main menu
 
@@ -26,8 +28,9 @@ def main_menu():
     print(f"Great choice! You have selected {hero.name}!")
     print(hero.check_status())
 
+main_menu()
 
-num = int(input(""))
+# num = int(input(""))
 
-def open_shop():
-    print("Welcome to the shop! Which item would you like?")
+# def open_shop():
+#     print("Welcome to the shop! Which item would you like?")

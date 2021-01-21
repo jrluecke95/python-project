@@ -5,4 +5,7 @@ class Hero(Character):
         super().__init__(name, health, power, armor, evasion, ability)
         self.items = items
 
+    def get_item(self, item):
+        self.items.append(item)
+
     

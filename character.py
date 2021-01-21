@@ -23,9 +23,12 @@ class Character:
         else:
             return False
 
+    def attack(self):
+        return self.power
+
     def take_damage(self, enemy):
         if random.random() * 100 < self.evasion:
-            net_damage = enemy.power - self.armor
+            net_damage = enemy.attack() - self.armor
             self.health -= net_damage
             print(f"{self.name} took {net_damage} from {enemy.name}")
         else:
