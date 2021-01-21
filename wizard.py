@@ -15,3 +15,5 @@ class Wizard(Hero):
                 return self.power * 2
             else:
                 return self.power
+        else:
+            return self.power
