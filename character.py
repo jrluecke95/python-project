@@ -1,12 +1,13 @@
 import random
 
 class Character:
-    def __init__(self, name, health, power, armor, evasion):
+    def __init__(self, name, health, power, armor, evasion, ability):
         self.name = name
         self.health = health
         self.power = power
         self.armor = armor
         self.evasion = evasion
+        self.ability = ability
 
     # def attack(self):
     #     return self.power
@@ -14,7 +15,7 @@ class Character:
     # use item function?
 
     def check_status(self):
-        print(f"{self.name} has {self.health}")
+        print(f"{self.name} has {self.health} health, {self.power} power, {self.armor} armor, {self.evasion} evasion and has {self.ability}.")
 
     def is_alive(self):
         if self.health > 0:
