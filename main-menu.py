@@ -36,13 +36,14 @@ def main_menu():
     print()
 
 # begins the journey into the rooms
-    rooms_list = ["A door covered in... brains?", "A door that has the silhouette of someone on it", "A door that has the outline of some tiny thing on it.. who knows"]
-    while hero.is_alive() == True:
-        if len(rooms_list) > 0:
-            for i in range(len(rooms_list)):
-                print(f"{i + 1}: {rooms_list[i]}")
-            choice = int(input("""
-            You stand in a big room lookoing at 3 different doors
+    # rooms_list = ["A door covered in... brains?", "A door that has the silhouette of someone on it", "A door that has the outline of some tiny thing on it.. who knows"]
+    rooms_dict = {1: "A door covered in... brains?", 2: "A door that has the silhouette of someone on it", 3: "A door that has the outline of some tiny thing on it.. who knows"}
+    while hero.is_alive() == True and (len(rooms_dict) > 0) == True:
+        if len(rooms_dict) > 0:
+            for room in rooms_dict:
+                print(f"{room}: {rooms_dict[room]}")
+            choice = int(input(f"""
+            You stand in a big room lookoing at {len(rooms_dict)} different doors
             each with a different challenge behind it
             which one do you choose? 
             choice >>> """))
@@ -53,7 +54,7 @@ def main_menu():
             else:
                 enemy = Goblin()
             print(f"You encounter a {enemy.name} in this room , what would you like to do?")
-        while hero.is_alive() == True:
+        while hero.is_alive() == True and (len(rooms_dict) > 0) == True:
             action_choice = int(input("""
         1. Attack
         2. Do Nothing
@@ -63,7 +64,7 @@ def main_menu():
             print(hero.check_status())
             print(enemy.check_status())
             if action_choice == 1:
-                enemy.take_damage(hero.name)
+                enemy.take_damage(hero)
                 hero.take_damage(enemy)
             elif action_choice == 2:
                 hero.take_damage(enemy)
@@ -74,26 +75,29 @@ def main_menu():
                 break
             if enemy.is_alive() == False:
                 print(f"you did it! you killed the {enemy.name}")
-                del rooms_list[choice - 1]
+                del rooms_dict[choice]
                 break
             if hero.is_alive() == False:
                 print("you died:/")
 
 
 
-                
+
     dragon = Dragon()
     while hero.is_alive() == True:
         print("You defeated all of the enemies, and a dragon crashes through the roof!")
         print("Running is futile - you have no choice except to stand and fight")
-        while hero.is_alive and dragon.is_alive() == True:
+        while hero.is_alive() == True and dragon.is_alive() == True:
             hero.take_damage(dragon)
             dragon.take_damage(hero)
         if dragon.is_alive() == False:
             print("You did it! you slayed all everyone in this area! the villagers thank you.")
+            break
         if hero.is_alive() == False:
             print("you died:/")
+            break
             
+
 
 
 
