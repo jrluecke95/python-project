@@ -89,22 +89,38 @@ def main_menu():
             if hero.is_alive() == False:
                 print("you died:/")
 
+    # fight_dragon()
 
 
-
+def fight_dragon():
     dragon = Dragon()
     while hero.is_alive() == True:
         print("You defeated all of the enemies, and a dragon crashes through the roof!")
         print("Running is futile - you have no choice except to stand and fight")
         while hero.is_alive() == True and dragon.is_alive() == True:
-            hero.take_damage(dragon)
-            dragon.take_damage(hero)
+            use_item_choice = int(input("""
+        Do you want to use an item this attack?1. yes
+        2. no
+        choice >>> """))
+            if use_item_choice == 1:
+                item_effect = item_attack()
+                if item_effect > 0:
+                    hero.health += item_effect
+                    print(f"You used an item and healed by {item_effect}points!")
+                elif item_effect < 0:
+                    dragon.health += item_effect
+                    print(f"you used an item and did {abs(item_effect)} damage to the dragon")
+                elif item_effect == 0:
+                    print("no item was used... against a dragon.")
+                hero.take_damage(dragon)
+                dragon.take_damage(hero)
         if dragon.is_alive() == False:
             print("You did it! you slayed all everyone in this area! the villagers thank you.")
             break
         if hero.is_alive() == False:
             print("you died:/")
             break
+
             
 
 def shop():
@@ -162,7 +178,11 @@ def item_attack():
             print(f"{counter}: You have {item[2]} {item[0]}")
             counter += 1
         which_item = int(input("choice >>> "))
-        return(hero.use_item(which_item - 1))
+        if hero.items[which_item -1][2] > 0:
+            return(hero.use_item(which_item - 1))
+        else:
+            print("you don't have any of those!")
+            return 0
     else:
         print("really? no item? good luck... moron")
         return 0
