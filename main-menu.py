@@ -19,20 +19,31 @@ from dragon import Dragon
 
 def hero_choice():
     print("Welcome to the game! Which hero would you like to select? Each hero has it's own strengths and weaknesses, so choose wisely")
-    answer = int(input("""
-    1. Paladin
-    2. Wizard
-    3. Assassin
-    choice >>> """))
-    if answer == 1:
-        hero = Paladin()
-    if answer == 2:
-        hero = Wizard()
-    if answer == 3:
-        hero = Assassin()
+    while True:
+        try:
+            answer = int(input("""
+            1. Paladin
+            2. Wizard
+            3. Assassin
+            choice >>> """))
+            if answer == 1:
+                hero = Paladin()
+                break
+            if answer == 2:
+                hero = Wizard()
+                break
+            if answer == 3:
+                hero = Assassin()
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            print("sorry! that wasn't a valid selection")
     print(f"Great choice! You have selected {hero.name}!")
     print(hero.check_status())
     return hero
+
+hero_choice()
 
 # begins the journey into the rooms
 # if the fight room function returned 0 for defeat/flree and 1 for killed enemy i could modify the rooms_dict in room chioce accordingly 
@@ -211,7 +222,7 @@ def item_attack(hero_choice):
 def play_game():
     room_choice(hero_choice())
 
-play_game()
+# play_game()
 
 
 
