@@ -26,5 +26,8 @@ class Character:
             print(f"{self.name} dodged {enemy.name}'s attack!")
         else:
             net_damage = (enemy.attack() - int(self.armor))
-            self.health -= net_damage
-            print(f"{self.name} took {net_damage} from {enemy.name}")
+            if net_damage > 0:
+                self.health -= net_damage
+                print(f"{self.name} took {net_damage} from {enemy.name}")
+            else:
+                print(f"{enemy.name} did no damage to {self.name} this attack")

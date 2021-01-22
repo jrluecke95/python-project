@@ -8,8 +8,10 @@ class Hero(Character):
 
     def get_item(self, item):
         item_choice = self.items[item]
-        item_choice[2] += 1
-        # return self.items
+        if item_choice == 2:
+            item_choice[2] = 5
+        else:
+            item_choice[2] += 1
     
     def use_item(self, item):
         item_choice = self.items[item]
