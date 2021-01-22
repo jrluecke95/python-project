@@ -1,18 +1,13 @@
 import random
 
 class Character:
-    def __init__(self, name, health, power, armor, evasion, ability):
+    def __init__(self, name="", health=0, power=0, armor=0, evasion=0, ability=""):
         self.name = name
         self.health = health
         self.power = power
         self.armor = armor
         self.evasion = evasion
         self.ability = ability
-
-    # def attack(self):
-    #     return self.power
-
-    # use item function?
 
     def check_status(self):
         return(f"{self.name} has {self.health} health, {self.power} power, {self.armor} armor, {self.evasion} evasion and has {self.ability}.")
@@ -33,7 +28,3 @@ class Character:
             net_damage = (enemy.attack() - int(self.armor))
             self.health -= net_damage
             print(f"{self.name} took {net_damage} from {enemy.name}")
-
-    # def helper_item(self, attribute):
-    #     self.attribute += somehow get th amount of attribute?
-

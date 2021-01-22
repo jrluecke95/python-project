@@ -36,7 +36,6 @@ def main_menu():
     print()
 
 # begins the journey into the rooms
-    # rooms_list = ["A door covered in... brains?", "A door that has the silhouette of someone on it", "A door that has the outline of some tiny thing on it.. who knows"]
     rooms_dict = {1: "A door covered in... brains?", 2: "A door that has the silhouette of someone on it", 3: "A door that has the outline of some tiny thing on it.. who knows"}
     while hero.is_alive() == True and (len(rooms_dict) > 0) == True:
         if len(rooms_dict) > 0:
@@ -64,13 +63,21 @@ def main_menu():
             print(hero.check_status())
             print(enemy.check_status())
             if action_choice == 1:
+                item_effect = item_attack()
+                if item_effect > 0:
+                    hero.health += item_effect
+                    print(f"You used an item and healed by {item_effect} points!")
+                elif item_effect < 0:
+                    enemy.health += item_effect
+                    print(f"You used an item and did {abs(item_effect)} damage to the {enemy.name}")
+                elif item_effect == 0:
+                    print("no item was used this attack")
                 enemy.take_damage(hero)
                 hero.take_damage(enemy)
             elif action_choice == 2:
                 hero.take_damage(enemy)
             elif action_choice == 3:
-                print("you enter the shop")
-                # run shop function
+                shop()
             else: 
                 print("coward")
                 break
@@ -100,81 +107,81 @@ def main_menu():
             break
             
 
-def shop(person):
-    shop_dict = {"poison potion": 5, "healing potion": 5, "bow and arrow": 10}
-    shop_dict_values = list(shop_dict.values())
-    shop_dict_keys = list(shop_dict.keys())
-    while person.coins > 0:
-        shop_answer = int(input("""
-    Welcome to the shop! 
-    What would you like to do here?
-    1. Buy Something
-    2. Just taking a break - i don't need anything
+def shop():
+    while True:
+        choose_shop = int(input("""
+    Welcome to the shop! Would you like to purcahse something today?
+    1. Yes
+    2. No - just needed a break from the battle
     choice >>> """))
-        if shop_answer == 1:
-            for item in shop_dict:
-                print(f"{shop_dict_keys.index(item) + 1}: {item} costs {shop_dict[item]}")
-            purchase = int(input("What item do you want? "))
-            person.coins -= shop_dict_values[purchase-1]
-            print(f"""you bought a {shop_dict_keys[purchase -1]} you have {person.coins} coins left""")
-            if shop_dict_keys[purchase -1] in person.items:
-                 person.items[shop_dict_keys[purchase -1]] += 1
+        if choose_shop == 1:
+            print("Here is what we have for you today\n")
+            counter = 1
+            for item in hero.items:
+                print(f"{counter}: {item[0]}")
+                counter += 1
+            item_choice = int(input("Which item would you like to purchase today? "))
+            if item_choice in range(len(hero.items)):
+                hero.get_item(item_choice - 1)
+                print(f"you bought a {hero.items[item_choice - 1][0]}")
+                hero.print_inventory()
             else:
-                person.items[shop_dict_keys[purchase -1]] = 1
-            print(person.items)
+                print("sorry that wasn't a valid choice!")
         else:
-            print("see you later!")
-    
+            break
 
-def open_inventory(person):
-    print("I see you need some help this fight")
-    keys_list = list(person.items.keys())
-    counter = 1
-    for item in person.items:
-        print(f"{counter}: you have {person.items[item]} {item}'s")
-        counter += 1
+
+def open_inventory():
+    while True:
+        counter = 0
+        for item in hero.items:
+            print(f"{counter + 1}: {item[2]} {item[0]}")
+            counter += 1
+        use_item_choice = int(input("Which item would you like to use this time? "))
+        if use_item_choice in range(len(hero.items)):
+            if hero.items[use_item_choice -1][2] > 0:
+                hero.use_item(use_item_choice - 1)
+                break
+            else:
+                print(f"sorry! you're all out of {hero.items[use_item_choice - 1][0]}")
+                break
+        else:
+            print("sorry that wasn't an option")
+            break
+
+def item_attack():
     use_item_choice = int(input("""
-    What would you like to do?
-    1. Use item
-    2. You don't need no stinking item
+    Would you like to use an item this attack?
+    1. yes
+    2. no - this enemy seems like a chump
     choice >>> """))
     if use_item_choice == 1:
-        inner_counter = 1
-        for item in person.items:
-            print(f"{inner_counter}: you have {person.items[item]} {item}'s")
-            inner_counter += 1
-        item_choice = int(input("What item would you like to use? "))
-        used_item = keys_list[item_choice - 1]
-        print(used_item)
-    if used_item == "poison potion":
-        person.items["poison potion"] -= 1
-        print(person.items)
-        return 5
-    elif used_item == "healing potion":
-        person.items["healing potion"] -= 1
-        print(person.items)
-        return 5
+        print("Which item would you like to use?")
+        counter = 1
+        for item in hero.items:
+            print(f"{counter}: You have {item[2]} {item[0]}")
+            counter += 1
+        which_item = int(input("choice >>> "))
+        return(hero.use_item(which_item - 1))
+    else:
+        print("really? no item? good luck... moron")
+        return 0
+
+# when they press attack
+# need a menu to come up between attacks that asks if they want to use items
+# if they say yes then
+    # show list of items
+    # ask which one they want to use
+    # accept input from them
+    # use said item on their attack - 
+# if they say no then:
+    # attack as usual
+
+
     
 
-    # able to buy and "use" items - need to implement this into the battle portion of the game
-    # need to figure out how to properly loop it so that you can use multiple items
-    # should find a better way to use ending if loops at the end of use item function
-    # could make each item and use of item it's own function
-
-
-shop_dict = {"poison potion": 5, "healing potion": 5, "bow and arrow": 10}
 
 
 hero = Paladin()
-shop(hero)
-open_inventory(hero)
 
-
-# main_menu()
-
-
-
-# num = int(input(""))
-
-# def open_shop():
-#     print("Welcome to the shop! Which item would you like?")
+main_menu()

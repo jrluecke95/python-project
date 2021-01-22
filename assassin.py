@@ -2,8 +2,8 @@ from hero import Hero
 import random
 
 class Assassin(Hero):
-    def __init__(self, name="assassin", health=150000, power=6, armor=0, evasion=0, ability="15 percent chance for a sneak attack that deals 100 damage", items={}, coins=0):
-        super().__init__(name, health, power, armor, evasion, ability, items, coins)
+    def __init__(self, items=[], name="assassin", health=150000, power=6, armor=0, evasion=0, ability="15 percent chance for a sneak attack that deals 100 damage", coins=0):
+        super().__init__(items, name, health, power, armor, evasion, ability, coins)
 
     def attack(self):
         answer = int(input("""

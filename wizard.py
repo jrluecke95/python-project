@@ -1,8 +1,8 @@
 from hero import Hero
 
 class Wizard(Hero):
-    def __init__(self, name="wizard", health=150000, power=6, armor=0, evasion=0, ability="a wand that does double damage when used", items={}, coins=0, wand_charge=5):
-        super().__init__(name, health, power, armor, evasion, ability, items, coins)
+    def __init__(self, items=[], name="wizard", health=150000, power=6, armor=0, evasion=0, ability="a wand that does double damage when used", coins=0, wand_charge=5):
+        super().__init__(items, name, health, power, armor, evasion, ability, coins)
         self.wand_charge = 5
 
     def attack(self):
