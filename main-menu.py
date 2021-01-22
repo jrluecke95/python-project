@@ -172,12 +172,13 @@ def shop(hero_choice):
                 for item in hero.items:
                     print(f"{counter}: {item[0]}")
                     counter += 1
+# need to check the item chioce to make sure it's valid before i can calc cost 
                 item_choice = int(input("Which item would you like to purchase today? "))
                 cost = item[item_choice - 1][2]
-                if item_choice in range(len(hero.items) + 1) and hero.coins => cost:
+                if item_choice in range(len(hero.items) + 1) and hero.coins >= cost:
                     hero.get_item(item_choice - 1)
                     print(f"you bought a {hero.items[item_choice - 1][0]}")
-                    hero.coins -= coins
+                    hero.coins -= cost
                     hero.print_inventory()
                     print(hero.coins)
                 else:
@@ -189,6 +190,7 @@ def shop(hero_choice):
         except ValueError:
             print("sorry that wasn't a valid selection")
 
+shop(Paladin())
 
 def open_inventory(hero_choice):
     hero = hero_choice
@@ -236,7 +238,7 @@ def item_attack(hero_choice):
 def play_game():
     room_choice(hero_choice())
 
-play_game()
+# play_game()
 
 
 
