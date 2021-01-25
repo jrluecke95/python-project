@@ -10,7 +10,9 @@ class Wizard(Hero):
             attack_style = int(input(f"""
             You have {self.wand_charge} wand charges left:
             1. use a wand charge
-            2. regular attack"""))
+            2. regular attack
+            
+            choice >>> """))
             if attack_style == 1:
                 self.wand_charge -= 1
                 return self.power * 2

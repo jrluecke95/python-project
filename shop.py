@@ -10,13 +10,14 @@ def shop(hero_choice):
     while True:
         try:
             choose_shop = int(input("""
-        Welcome to the shop! Would you like to purcahse something today?
-        1. Yes
-        2. No - just needed a break from the battle
-        choice >>> """))
+Welcome to the shop! Would you like to purcahse something today?
+1. Yes
+2. No - just needed a break from the battle
+
+choice >>> """))
             # below if loop enters shop and prints list before next user input checker
             if choose_shop == 1:
-                print("Here is what we have for you today\n")
+                print("Here is what we have for you today:\n")
                 item_names = list(hero.items.keys())
                 counter = 1
                 for item in item_names:
@@ -25,10 +26,13 @@ def shop(hero_choice):
                 # this while loop checks to see if choice is in range
                 while True:
                     try:
-                        item_choice_num = int(input("Which item would you like to purchase today? Type 0 if you decide you don't want anything")) - 1
+                        item_choice_num = int(input("""
+Which item would you like to purchase today? Type 0 if you decide you don't want anything 
+
+choice >>> """)) - 1
                         if item_choice_num in range(len(item_names)): 
                             item_choice_name = item_names[item_choice_num]
-                            print(f"You have selected {item_choice_name}")
+                            print(f"You have selected {item_choice_name}\n")
                             break
                         elif item_choice_num == -1:
                             break
@@ -41,9 +45,9 @@ def shop(hero_choice):
                     break
                 item_cost = hero.items[item_choice_name]["cost"]
                 if hero.coins >= item_cost:
-                    print(f"you bought a {item_choice_name}")
+                    print(f"you bought a {item_choice_name} that costs {item_cost} coins\n")
                     hero.coins -= item_cost
-                    print(f"you now have {hero.coins} coins")
+                    print(f"you now have {hero.coins} coins\n")
                     hero.get_item(item_choice_name)
                     hero.print_inventory()
                 else:

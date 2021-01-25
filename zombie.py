@@ -12,4 +12,4 @@ class Zombie(Character):
             print(f"headshot! {self.name} is dead.")
             self.health = 0
         else:
-            pass
+            print("You need a headshot to kill this zombie!")

@@ -1,5 +1,6 @@
 from hero import Hero
 from paladin import Paladin
+from goblin import Goblin
 from item_fucntions import heal
 from item_fucntions import damage
 from item_fucntions import add_armor
@@ -11,10 +12,11 @@ def use_item(hero_choice, enemy_choice):
     while True:
         try:
             use_item_choice = int(input("""
-            Would you like to use an item this attack?
-            1. yes
-            2. no - this enemy seems like a chump
-            choice >>> """))
+Would you like to use an item this attack?
+1. yes
+2. no - this enemy seems like a chump
+
+choice >>> """))
             if use_item_choice == 1:
                 print("Which item would you like to use?")
                 while True:
@@ -58,4 +60,3 @@ def use_item(hero_choice, enemy_choice):
                 raise ValueError
         except ValueError:
             print("sorry that wasn't a valid selection")
-

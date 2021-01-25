@@ -10,12 +10,12 @@ class Hero(Character):
         for item in self.items:
             print(f"You have {self.items[item]['quantity']} {item}'s")
     
-    def check_status(self):
+    def full_stats(self):
         return(f"{self.name} has {self.health} health, {self.power} power, {self.armor} armor, {self.evasion} evasion, {self.coins} coins, and has {self.ability}.")
 
     def get_item(self, item):
         item_choice = self.items[item]
-        if item == ("bow and arrow"):
+        if item == ('bow and arrow'):
             item_choice["quantity"] += 5
         else:
             item_choice["quantity"] += 1

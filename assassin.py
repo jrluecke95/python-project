@@ -7,10 +7,10 @@ class Assassin(Hero):
 
     def attack(self):
         answer = int(input("""
-        Would you like to try a sneak attack?
-        1. yes
-        2. no
-        choice >>> """))
+Would you like to try a sneak attack?
+1. yes
+2. no
+choice >>> """))
         if answer == 1:
             chance = random.random() * 100
             if chance < 15:
