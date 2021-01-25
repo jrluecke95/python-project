@@ -1,17 +1,9 @@
 from character import Character
 
 class Hero(Character):
-    def __init__(self, items=[], name="", health=0, power=0, armor=0, evasion=0, ability=0, coins=0):
+    def __init__(self, items={}, name="", health=0, power=0, armor=0, evasion=0, ability="", coins=0):
         super().__init__(name, health, power, armor, evasion, ability)
-        self.items = [["healing potion", 5, 1], ["poison potion", -5, 0], ["bow and arrow", -5, 0]]
-        
-        # self.dict_items = {
-        #     "healing potion": {
-        #         "health_impact": 5,
-        #         "quantity": 1
-        #     },
-        #     ""
-        # }
+        self.items = {"healing potion": {"health_impact": 5, "quantity": 1}, "poision potion": {"health impact": 5, "quantity": 0}, "bow and arrow": {"health_impact": 5, "quantity": 0}}
         self.coins = coins
 
     def get_item(self, item):
