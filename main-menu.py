@@ -9,6 +9,7 @@ from goblin import Goblin
 from dragon import Dragon
 from shop import shop
 from use_item import use_item
+from fight_dragon import fight_dragon
 
 def hero_choice():
     print("Welcome to the game! Which hero would you like to select? Each hero has it's own strengths and weaknesses, so choose wisely")
@@ -42,9 +43,10 @@ choice >>> """))
 def room_choice(hero_choice):
     hero = hero_choice
     dragon_dead = False
-    rooms_dict = {"Room 1": "A door covered in... brains?", "Room 2": "A door that has the silhouette of someone on it", "Room 3": "A door that has the outline of some tiny thing on it.. who knows"}
+    win = False
+    rooms_dict = {"Room 1": "A door covered in... brains?", "Room 2": "A door that has the silhouette of someone on it", "Room 3": "A door that has the outline of some tiny thing on it.. who knows", "Room 4": "Shop"}
     cleared_rooms = []
-    while hero.is_alive() is True:
+    while hero.is_alive() is True and dragon_dead == False:
         try:
             rooms_string = ""
             for room in rooms_dict:
@@ -58,15 +60,19 @@ which one do you choose?
 choice >>> """))
             if choice == 1:
                 enemy = Zombie()
+                win = fight_room(hero, enemy)
             elif choice == 2:
                 enemy = Shadow()
+                win = fight_room(hero, enemy)
             elif choice == 3:
                 enemy = Goblin()
+                win = fight_room(hero, enemy)
+            elif choice == 4:
+                shop(hero)
             else:
                 raise ValueError
-        except:
+        except ValueError:
             print("Sorry! that wasn't a valid selection")
-        win = fight_room(hero, enemy)
         if win == True:
             cleared_rooms.append(rooms_dict[f'Room {choice}'])
             rooms_dict[f'Room {choice}'] += ' - cleared' 
@@ -97,8 +103,6 @@ choice >>> """))
                         raise ValueError
                 except:
                     print("sorry that wasn't a valid choice")
-        if dragon_dead == True:
-            break
 
 def fight_room(hero_choice, enemy_choice):
     hero = hero_choice
@@ -110,8 +114,7 @@ def fight_room(hero_choice, enemy_choice):
             action_choice = int(input("""
 1. Attack
 2. Do Nothing
-3. Enter the shop that's in this room for some reason
-4. Flee
+3. Flee
 
 choice>>> """))
             if action_choice == 1:
@@ -122,9 +125,7 @@ choice>>> """))
             elif action_choice == 2:
                 hero.take_damage(enemy)
                 print()
-            elif action_choice == 3:
-                shop(hero)
-            elif action_choice == 4: 
+            elif action_choice == 3: 
                 print("coward")
                 return False
             else:
@@ -140,79 +141,10 @@ choice>>> """))
         if hero.is_alive() == False:
             print("you died:/")
             return False
-
-
-def fight_dragon(hero_choice):
-    hero = hero_choice
-    dragon = Dragon()
-    print("""
     
-    You defeated all of the enemies.
-    You step outisde to get a breath of fresh air...
-    You hear a distant noise and then BOOM!!!!!
-    A dragon lands in front of you and lets out a roar")
-    
-    Running is futile - you have no choice except to stand and fight""")
-    while hero.is_alive() == True and dragon.is_alive() == True:
-        try:
-            use_item_choice = int(input("""
-Do you want to check your inventory?
-1. yes
-2. no
+def play_game():
+    room_choice(hero_choice())
 
-choice >>> """))
-            if use_item_choice == 1:
-                hero.print_inventory()
-                item_effect = use_item(hero, dragon)
-                if item_effect == 0:
-                    print("no item was used... against a dragon.")
-                dragon.take_damage(hero)
-                hero.take_damage(dragon)
-                break
-            elif use_item_choice == 2:
-                dragon.take_damage(hero)
-                hero.take_damage(dragon)
-            else:
-                raise ValueError
-        except ValueError:
-            print("sorry that wasn't a valid selection!")
-        if dragon.is_alive() == False:
-            print("You did it! you slayed all everyone in this area! the villagers thank you.")
-            break
-        if hero.is_alive() == False:
-            print("you died:/")
-            break
-
-
-    
-# def play_game():
-#     room_choice(hero_choice())
-
-# play_game()
-hero = Paladin()
-room_choice(hero)
-
-
-
-# def open_inventory(hero_choice):
-#     hero = hero_choice
-#     while True:
-#         counter = 0
-#         for item in hero.items:
-#             print(f"{counter + 1}: {item[2]} {item[0]}")
-#             counter += 1
-#         try:
-#             use_item_choice = int(input("Which item would you like to use this time? "))
-#             if use_item_choice in range(len(hero.items)):
-#                 if hero.items[use_item_choice -1][2] > 0:
-#                     return hero.use_item(use_item_choice - 1)
-#                     # break
-#                 else:
-#                     print(f"sorry! you're all out of {hero.items[use_item_choice - 1][0]}")
-#                     break
-#             else:
-#                 raise ValueError
-#         except ValueError:
-#             print("sorry that wasn't a valid selection")
+play_game()
 
 

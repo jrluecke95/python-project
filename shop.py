@@ -2,8 +2,6 @@
 from hero import Hero
 from paladin import Paladin
 
-
-
 # have to check the inner item choice loop in addition to the broader do you wnat an item choice
 def shop(hero_choice):
     hero = hero_choice
@@ -18,10 +16,11 @@ choice >>> """))
             # below if loop enters shop and prints list before next user input checker
             if choose_shop == 1:
                 print("Here is what we have for you today:\n")
+                print(f"You have {hero.coins} coins\n")
                 item_names = list(hero.items.keys())
                 counter = 1
                 for item in item_names:
-                    print(f"{counter}: {item}")
+                    print(f"{counter}: {item} costs {hero.items[item]['cost']} coins")
                     counter += 1
                 # this while loop checks to see if choice is in range
                 while True:
