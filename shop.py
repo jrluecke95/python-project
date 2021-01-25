@@ -46,7 +46,6 @@ def shop(hero_choice):
                     print(f"you now have {hero.coins} coins")
                     hero.get_item(item_choice_name)
                     hero.print_inventory()
-                    break
                 else:
                     print("sorry you do not have enough coins for that")
             elif choose_shop == 2:
@@ -55,7 +54,3 @@ def shop(hero_choice):
                 raise ValueError
         except ValueError:
             print("sorry that wasn't a valid selection")
-
-hero = Paladin()
-
-shop(hero)

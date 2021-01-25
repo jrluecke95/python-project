@@ -24,17 +24,3 @@ class Hero(Character):
         item_choice = self.items[item]
         item_choice["quantity"] -= 1
         return item_choice["effect amount"]
-
-# hero = Hero()
-
-# hero.get_item("bow and arrow")
-# print(hero.items)
-
-# # item_names = list(hero.items.keys())
-# # print(item_names)
-
-# # item_info = []
-# # for item in item_names:
-# #     item_info.append(hero.items[item])
-
-# # print(hero.items[item_names[0]]["health impact"])

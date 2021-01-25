@@ -5,8 +5,9 @@ from item_fucntions import damage
 from item_fucntions import add_armor
 from item_fucntions import add_evasion
 
-def use_item(hero_choice):
+def use_item(hero_choice, enemy_choice):
     hero = hero_choice
+    enemy = enemy_choice
     while True:
         try:
             use_item_choice = int(input("""
@@ -29,19 +30,19 @@ def use_item(hero_choice):
                             if hero.items[item_name]['quantity'] > 0:
                                 if hero.items[item_name]["effect type"] == 'heal':
                                     heal(hero, hero.use_item(item_name))
-                                    print(hero.check_status())
+                                    print(f"You used {item_name} and gained {hero.items[item_name]['effect amount']} of health")
                                     break
                                 elif hero.items[item_name]["effect type"] == 'damage':
-                                    damage(hero, hero.use_item(item_name))
-                                    print(hero.check_status())
+                                    damage(enemy, hero.use_item(item_name))
+                                    print(f"You used {item_name} and did {hero.items[item_name]['effect amount']} extra damge")
                                     break
                                 elif hero.items[item_name]["effect type"] == 'add armor':
                                     add_armor(hero, hero.use_item(item_name))
-                                    print(hero.check_status())
+                                    print(f"You used {item_name} and gained {hero.items[item_name]['effect amount']} armor")
                                     break
-                                elif hero.items[item_name]["effect type"] == 'add evaasion':
+                                elif hero.items[item_name]["effect type"] == 'add evasion':
                                     add_evasion(hero, hero.use_item(item_name))
-                                    print(hero.check_status())
+                                    print(f"You used {item_name} and gained {hero.items[item_name]['effect amount']} evasion")
                                     break
                             else:
                                 print("you don't have any of those!")
@@ -57,12 +58,4 @@ def use_item(hero_choice):
                 raise ValueError
         except ValueError:
             print("sorry that wasn't a valid selection")
-
-hero = Paladin()
-print(hero.check_status())
-use_item(hero)
-print(hero.check_status())
-
-# need to adjust purhcasing function and use dictionary for coins
-# need to adjust whole shop function really and get it to use dictionary as it's intake musicg j
 

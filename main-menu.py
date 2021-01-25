@@ -7,6 +7,8 @@ from zombie import Zombie
 from shadow import Shadow
 from goblin import Goblin
 from dragon import Dragon
+from shop import shop
+from use_item import use_item
 
 def hero_choice():
     print("Welcome to the game! Which hero would you like to select? Each hero has it's own strengths and weaknesses, so choose wisely")
@@ -83,14 +85,8 @@ def fight_room(hero_choice, enemy_choice):
             print(hero.check_status())
             print(enemy.check_status())
             if action_choice == 1:
-                item_effect = item_attack(hero)
-                if item_effect > 0:
-                    hero.health += item_effect
-                    print(f"You used an item and healed by {item_effect} points!")
-                elif item_effect < 0:
-                    enemy.health += item_effect
-                    print(f"You used an item and did {abs(item_effect)} damage to the {enemy.name}")
-                elif item_effect == 0:
+                item_effect = use_item(hero, enemy)
+                if item_effect == 0:
                     print("no item was used this attack")
                 enemy.take_damage(hero)
                 hero.take_damage(enemy)
@@ -117,7 +113,7 @@ def fight_room(hero_choice, enemy_choice):
 def fight_dragon(hero_choice):
     hero = hero_choice
     dragon = Dragon()
-    while hero.is_alive() == True:
+    while hero.is_alive() == True and dragon.is_alive() == True:
         print("You defeated all of the enemies, and a dragon crashes through the roof!")
         print("Running is futile - you have no choice except to stand and fight")
         while hero.is_alive() == True and dragon.is_alive() == True:
@@ -129,14 +125,8 @@ def fight_dragon(hero_choice):
             choice >>> """))
                 if use_item_choice == 1:
                     hero.print_inventory()
-                    item_effect = item_attack(hero)
-                    if item_effect > 0:
-                        hero.health += item_effect
-                        print(f"You used an item and healed by {item_effect}points!")
-                    elif item_effect < 0:
-                        dragon.health += item_effect
-                        print(f"you used an item and did {abs(item_effect)} damage to the dragon")
-                    elif item_effect == 0:
+                    item_effect = use_item(hero, dragon)
+                    if item_effect == 0:
                         print("no item was used... against a dragon.")
                     hero.take_damage(dragon)
                     dragon.take_damage(hero)
