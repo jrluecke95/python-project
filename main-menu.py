@@ -10,6 +10,7 @@ from dragon import Dragon
 from shop import shop
 from use_item import use_item
 from fight_dragon import fight_dragon
+from fight_room import fight_room
 
 def hero_choice():
     print("Welcome to the game! Which hero would you like to select? Each hero has it's own strengths and weaknesses, so choose wisely")
@@ -103,44 +104,6 @@ choice >>> """))
                         raise ValueError
                 except:
                     print("sorry that wasn't a valid choice")
-
-def fight_room(hero_choice, enemy_choice):
-    hero = hero_choice
-    enemy = enemy_choice
-    print(f"You encounter a {enemy.name} in this room, what would you like to do?")
-    print(enemy.full_stats())
-    while hero.is_alive() == True:
-        try:
-            action_choice = int(input("""
-1. Attack
-2. Do Nothing
-3. Flee
-
-choice>>> """))
-            if action_choice == 1:
-                use_item(hero, enemy)
-                enemy.take_damage(hero)
-                hero.take_damage(enemy)
-                print()
-            elif action_choice == 2:
-                hero.take_damage(enemy)
-                print()
-            elif action_choice == 3: 
-                print("coward")
-                return False
-            else:
-                raise ValueError
-            print(hero.check_vitals())
-            print(enemy.check_vitals())
-        except ValueError:
-            print("sorry! that wasn't a valid choice")
-        if enemy.is_alive() == False:
-            print(f"you did it! you killed the {enemy.name} and got {enemy.bounty} gold coins from its lifeless corpse")
-            hero.coins += enemy.bounty
-            return True
-        if hero.is_alive() == False:
-            print("you died:/")
-            return False
     
 def play_game():
     room_choice(hero_choice())
