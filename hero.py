@@ -3,24 +3,38 @@ from character import Character
 class Hero(Character):
     def __init__(self, items={}, name="", health=0, power=0, armor=0, evasion=0, ability="", coins=0):
         super().__init__(name, health, power, armor, evasion, ability)
-        self.items = {"healing potion": {"health_impact": 5, "quantity": 1}, "poision potion": {"health impact": 5, "quantity": 0}, "bow and arrow": {"health_impact": 5, "quantity": 0}}
+        self.items = {"healing potion": {"effect type": "heal", "effect amount": 5, "quantity": 1, "cost": 5}, "poision potion": {"effect type": "damage", "effect amount": 5, "quantity": 1, "cost": 5}, "bow and arrow": {"effect type": "damage", "effect amount": 5, "quantity": 1, "cost": 10}, "piece of armor": {"effect type": "add armor", "effect amount": 5, "quantity": 1, "cost": 3}, "smoke screen": {"effect type": "add evasion", "effect amount": 5, "quantity": 1, "cost": 5}}
         self.coins = coins
-
-    def get_item(self, item):
-        item_choice = self.items[item]
-        if item_choice == 2:
-            item_choice[2] = 5
-        else:
-            item_choice[2] += 1
-    
-    def use_item(self, item):
-        item_choice = self.items[item]
-        item_choice[2] -= 1
-        return item_choice[1]
 
     def print_inventory(self):
         for item in self.items:
-            print(f"You have {item[2]} {item[0]}'s that provide {item[1]} hit points for your next task")
+            print(f"You have {self.items[item]['quantity']} {item}'s")
     
     def check_status(self):
         return(f"{self.name} has {self.health} health, {self.power} power, {self.armor} armor, {self.evasion} evasion, {self.coins} coins, and has {self.ability}.")
+
+    def get_item(self, item):
+        item_choice = self.items[item]
+        if item == ("bow and arrow"):
+            item_choice["quantity"] += 5
+        else:
+            item_choice["quantity"] += 1
+    
+    def use_item(self, item):
+        item_choice = self.items[item]
+        item_choice["quantity"] -= 1
+        return item_choice["effect amount"]
+
+# hero = Hero()
+
+# hero.get_item("bow and arrow")
+# print(hero.items)
+
+# # item_names = list(hero.items.keys())
+# # print(item_names)
+
+# # item_info = []
+# # for item in item_names:
+# #     item_info.append(hero.items[item])
+
+# # print(hero.items[item_names[0]]["health impact"])

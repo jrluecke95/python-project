@@ -155,88 +155,6 @@ def fight_dragon(hero_choice):
                 print("you died:/")
                 break
 
-            
-# have to check the inner item choice loop in addition to the broader do you wnat an item choice
-def shop(hero_choice):
-    hero = hero_choice
-    while True:
-        try:
-            choose_shop = int(input("""
-        Welcome to the shop! Would you like to purcahse something today?
-        1. Yes
-        2. No - just needed a break from the battle
-        choice >>> """))
-            # below if loop enters shop and prints list before next user input checker
-            if choose_shop == 1:
-                print("Here is what we have for you today\n")
-                counter = 1
-                for item in hero.items:
-                    print(f"{counter}: {item[0]}")
-                    counter += 1
-                # this while loop checks to see if choice is in range
-                while True:
-                    try:
-                        item_choice = int(input("Which item would you like to purchase today? "))
-                        if item_choice in range(len(hero.items) + 1): 
-                            print(f"You have selected {hero.items[item_choice - 1][0]}")
-                            break
-                        else:
-                            raise ValueError
-                    except ValueError:
-                        print("Sorry that wasn't a valid selection")
-                # outside of previous while loop this if statement checks if they have enough coins and if not it goes back to shop main menu by default because it is in larger while loop
-                cost = hero.items[item_choice - 1][1]
-                if hero.coins >= cost:
-                    print(f"you bought a {hero.items[item_choice - 1][0]}")
-                    hero.coins -= cost
-                    print(hero.coins)
-                    hero.get_item(item_choice - 1)
-                    hero.print_inventory()
-                    break
-                else:
-                    print("sorry you do not have enough coins for that")
-            elif choose_shop == 2:
-                break
-            else:
-                raise ValueError
-        except ValueError:
-            print("sorry that wasn't a valid selection")
-
-def item_attack(hero_choice):
-    hero = hero_choice
-    while True:
-        try:
-            use_item_choice = int(input("""
-            Would you like to use an item this attack?
-            1. yes
-            2. no - this enemy seems like a chump
-            choice >>> """))
-            if use_item_choice == 1:
-                print("Which item would you like to use?")
-                while True:
-                    try:
-                        counter = 1
-                        for item in hero.items:
-                            print(f"{counter}: You have {item[2]} {item[0]}")
-                            counter += 1
-                        which_item = int(input("choice >>> "))
-                        if which_item in range(len(hero.items) + 1):
-                            if hero.items[which_item -1][2] > 0:
-                                return(hero.use_item(which_item - 1))
-                            else:
-                                print("you don't have any of those!")
-                                return 0
-                        else:
-                            raise ValueError
-                    except ValueError:
-                        print("sorry that wasn't a valid selection")
-            elif use_item_choice == 2:
-                print("really? no item? good luck... moron")
-                return 0
-            else:
-                raise ValueError
-        except ValueError:
-            print("sorry that wasn't a valid selection")
 
     
 def play_game():
@@ -263,3 +181,5 @@ play_game()
 #                 raise ValueError
 #         except ValueError:
 #             print("sorry that wasn't a valid selection")
+
+

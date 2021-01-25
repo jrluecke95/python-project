@@ -34,6 +34,23 @@ item_names = list(hero.items.keys())
 
 
 # accessing attribute of items in list
-for item in item_names:
-    print(hero.items[item].keys())
+# for item in item_names:
+#     print(hero.items[item].values())
+# print(list(hero.items.values()))
 
+# this works to take away one instance of item
+hero.items["healing potion"]["quantity"] -= 1
+
+
+# create lists of items
+# create list of item effects 
+# print(item_values[0].values())
+
+item_names = list(hero.items.keys())
+print(item_names)
+
+item_info = []
+for item in item_names:
+    item_info.append(hero.items[item])
+
+print(hero.items[item_names[0]]["health impact"])
