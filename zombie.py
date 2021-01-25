@@ -2,7 +2,7 @@ from character import Character
 import random
 
 class Zombie(Character):
-    def __init__(self, name="zombie", health=1, power=3, armor=0, evasion=0, ability = "can only die form head shots", bounty=10):
+    def __init__(self, name="zombie", health=1, power=3, armor=0, evasion=0, ability = "can only die from head shots", bounty=10):
         super().__init__(name, health, power, armor, evasion, ability)
         self.bounty = bounty
     
@@ -12,4 +12,4 @@ class Zombie(Character):
             print(f"headshot! {self.name} is dead.")
             self.health = 0
         else:
-            print("You need a headshot to kill this zombie!")
+            print("You missed its head! good luck killing this zombie!")

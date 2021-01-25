@@ -18,11 +18,12 @@ Would you like to use an item this attack?
 
 choice >>> """))
             if use_item_choice == 1:
-                print("Which item would you like to use?")
+                print("Which item would you like to use?\n")
                 while True:
                     try:
                         item_names = list(hero.items.keys())
                         counter = 1
+                        print("Type 0 if you changed your mind and don't want to use an item")
                         for item in item_names:
                             print(f"{counter}: You have {hero.items[item]['quantity']} {item}'s")
                             counter += 1
@@ -49,6 +50,8 @@ choice >>> """))
                             else:
                                 print("you don't have any of those!")
                                 return 0
+                        elif which_item == -1:
+                            return 0
                         else:
                             raise ValueError
                     except ValueError:
