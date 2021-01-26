@@ -49,7 +49,6 @@ choice >>> """))
                                     break
                             else:
                                 print("you don't have any of those!")
-                                return 0
                         elif which_item == -1:
                             return 0
                         else:
