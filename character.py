@@ -25,7 +25,7 @@ class Character:
         return int(self.power)
 
     def take_damage(self, enemy):
-        net_damage = (enemy.attack() - self.armor)
+        net_damage = (enemy.attack() - (self.armor * .5))
         if random.random() * 100 < self.evasion * .75:
             print(f"{self.name} dodged {enemy.name}'s attack!")
         else:
